@@ -358,6 +358,11 @@ queryCoordinator:
 
 queryNode:
   enabled: true
+  # Note: only one of the following two fields should be set to true
+  # query node can be deployed as a statefulset or a deployment
+  deployment: true
+  statefulset: false
+
   # You can set the number of replicas to -1 to remove the replicas field in case you want to use HPA
   replicas: 1
   resources: {}
@@ -382,6 +387,11 @@ queryNode:
   # Ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-update-deployment
   strategy: {}
   annotations: {}
+  persistence:
+    enabled: false
+    storageClass:
+    accessMode: ReadWriteOnce
+    size: 50Gi
 
 indexCoordinator:
   enabled: false
@@ -412,6 +422,11 @@ indexCoordinator:
 
 indexNode:
   enabled: true
+  # Note: only one of the following two fields should be set to true
+  # query node can be deployed as a statefulset or a deployment
+  deployment: true
+  statefulset: false
+
   # You can set the number of replicas to -1 to remove the replicas field in case you want to use HPA
   replicas: 1
   resources: {}
@@ -435,6 +450,11 @@ indexNode:
   # Ref: https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#rolling-update-deployment
   strategy: {}
   annotations: {}
+  persistence:
+    enabled: false
+    storageClass:
+    accessMode: ReadWriteOnce
+    size: 50Gi
 
 dataCoordinator:
   enabled: false
